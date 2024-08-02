@@ -35,10 +35,19 @@ I downloaded the [Arduino IDE](https://www.arduino.cc/en/software), which will b
 
 Next, I downloaded the custom Northern Widget libraries found at the link https://github.com/NorthernWidget/NorthernWidget-libraries. There are detailed instructions in the readme, but I'll summarize here. First, I found where my Arduino libraries folder was. The standard location on Windows should be **My Documents\Arduino\libraries**. You can also find out by going to **File > Preferences** in the Arduino IDE, and looking at the Sketchbook location towards the top. For me, the Arduino folder in My Documents was empty (there was no libraries folder inside), but that was okay. 
 
-I downloaded the Northern Widget libraries using git so that updating them would be easier in the future, but had to download Git first ([available here](https://git-scm.com/downloads)). In the Git Bash application, I changed directories into my Arduino libraries folder, then went back to my browser and copied the link from the [NorthernWidget-libraries repository](https://github.com/NorthernWidget/NorthernWidget-libraries). (I clicked on the green **Code** button at the top of the page, then copied the link under the HTTPS option. More instructions for cloning in git are [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).) In Git Bash, I entered 
+I downloaded the Northern Widget libraries using git so that updating them would be easier in the future, but had to download Git first ([available here](https://git-scm.com/downloads)). In the Git Bash application, I changed directories into my Arduino libraries folder, then went back to my browser and copied the link from the [NorthernWidget-libraries repository](https://github.com/NorthernWidget/NorthernWidget-libraries). (I clicked on the green **Code** button at the top of the page, then copied the link under the HTTPS option. More instructions for cloning in git are [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).) 
+
+In Git Bash, I entered 
+
 `git clone https://github.com/NorthernWidget/NorthernWidget-libraries.git` 
+
 using the link I had just copied. When I checked my Arduino folder again, it now had a folder inside it called **NorthernWidget-libraries**.
-<!-- insert screenshot here? -->
+
+![Where to find copy-able link in GitHub](GithubClone.png?raw=true "Title")
+
+<div>
+<img src="https://github.com/user-attachments/assets/d752574e-9fea-4da1-952f-d7bb3ed83332" align="left" width="200"/>
+</div>
 
 The last thing I downloaded was the SetTimeGUI, with download and running instructions on [this page](https://github.com/NorthernWidget/SetTime_GUI). For now, though, all I did was click the green Code button and use `git clone` to download the files in the repository (or you could download the zip file.) I needed to download [Processing](https://processing.org/download) too, in order to eventually run SetTime.
 
@@ -71,7 +80,20 @@ Then go to **Tools > Burn Bootloader** in the Arduino IDE, and you should find o
 
 If it didn't work, the most common reason is that the programmer's cable is plugged into the board the wrong way. Flip it around and try again.
 
-I was getting an error message relating to my port/driver, and the option for me to select a port in the IDE was grayed out. I downloaded [Zadig](https://zadig.akeo.ie/)
+I was getting an error message relating to the USB port/driver in my laptop where the cable was plugged in. The option for me to select which port I was using in the IDE was grayed out. I downloaded [Zadig](https://zadig.akeo.ie/), which installs a USB driver. Once the Zadig window comes up, use the up/down arrows to select a driver. I chose libusbK. 
+<!-- insert picture -->
+
+Back in the Arduino IDE, I now had the option to select a port. Only one option came up for me: COM3, so I selected this, tried to burn a bootloader again, and it worked! 
+
+#### Testing
+
+To test it out, I uploaded a simple example program to see if the board would follow its instructions. I disconnected the programmer, and instead used the USB-C cable to connect the logger to my computer. 
+<!-- insert picture of plugged in -->
+
+A simple example program to test was at **File > Examples > 01.Basics > Blink**. As the documentation says, it turns the LED on the board on for a second, and off for a second repeatedly. I uploaded this to the logger by going to **Sketch > Upload**, and saw that the Arduino LED was blinking like expected.
+
+
+
 
 
 

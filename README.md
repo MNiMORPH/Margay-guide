@@ -36,18 +36,16 @@ I downloaded the [Arduino IDE](https://www.arduino.cc/en/software), which will b
 Next, I downloaded the custom Northern Widget libraries found at the link https://github.com/NorthernWidget/NorthernWidget-libraries. There are detailed instructions in the readme, but I'll summarize here. First, I found where my Arduino libraries folder was. The standard location on Windows should be **My Documents\Arduino\libraries**. You can also find out by going to **File > Preferences** in the Arduino IDE, and looking at the Sketchbook location towards the top. For me, the Arduino folder in My Documents was empty (there was no libraries folder inside), but that was okay. 
 
 I downloaded the Northern Widget libraries using git so that updating them would be easier in the future, but had to download Git first ([available here](https://git-scm.com/downloads)). In the Git Bash application, I changed directories into my Arduino libraries folder, then went back to my browser and copied the link from the [NorthernWidget-libraries repository](https://github.com/NorthernWidget/NorthernWidget-libraries). (I clicked on the green **Code** button at the top of the page, then copied the link under the HTTPS option. More instructions for cloning in git are [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).) 
+<div>
+    <img src="GithubClone.png" style="float:left; width:300px; height:300px" alt="Clone link in GitHub"/>
+</div>
+<div clear: both> </div>
 
 In Git Bash, I entered 
 
 `git clone https://github.com/NorthernWidget/NorthernWidget-libraries.git` 
 
 using the link I had just copied. When I checked my Arduino folder again, it now had a folder inside it called **NorthernWidget-libraries**.
-
-![Where to find copy-able link in GitHub](GithubClone.png?raw=true "Title")
-
-<div>
-<img src="https://github.com/user-attachments/assets/d752574e-9fea-4da1-952f-d7bb3ed83332" align="left" width="200"/>
-</div>
 
 The last thing I downloaded was the SetTimeGUI, with download and running instructions on [this page](https://github.com/NorthernWidget/SetTime_GUI). For now, though, all I did was click the green Code button and use `git clone` to download the files in the repository (or you could download the zip file.) I needed to download [Processing](https://processing.org/download) too, in order to eventually run SetTime.
 

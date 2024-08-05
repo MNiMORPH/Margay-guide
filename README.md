@@ -14,7 +14,11 @@ I started by gathering all the materials I'd need.
 - My laptop
     - To download softwares and upload programs to the Margay logger.
  
-<!-- insert pictures of the logger and the programmer here -->
+<div>
+    <img src="https://github.com/user-attachments/assets/94785e2c-cfe8-4ff8-8d98-bc7777cd5f79" style="float:left; width:300px; height:300px; overflow:hidden" alt="Choosing driver in Zadig"/>
+    <img src="https://github.com/user-attachments/assets/e82422a4-9de9-45f3-a0f7-4397bf304e4e" style="float:right; height:300px" alt="Choosing driver in Zadig"/>
+</div>
+<div clear: both> </div>
 
 #### What is "burning a bootloader"? 
 
@@ -37,7 +41,7 @@ Next, I downloaded the custom Northern Widget libraries found at the link https:
 
 I downloaded the Northern Widget libraries using git so that updating them would be easier in the future, but had to download Git first ([available here](https://git-scm.com/downloads)). In the Git Bash application, I changed directories into my Arduino libraries folder, then went back to my browser and copied the link from the [NorthernWidget-libraries repository](https://github.com/NorthernWidget/NorthernWidget-libraries). (I clicked on the green **Code** button at the top of the page, then copied the link under the HTTPS option. More instructions for cloning in git are [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).) 
 <div>
-    <img src="GithubClone.png" style="float:left; width:300px; height:300px" alt="Clone link in GitHub"/>
+    <img src="GithubClone.png" style="float:left; width:300px" alt="Clone link in GitHub"/>
 </div>
 <div clear: both> </div>
 
@@ -79,16 +83,19 @@ Then go to **Tools > Burn Bootloader** in the Arduino IDE, and you should find o
 If it didn't work, the most common reason is that the programmer's cable is plugged into the board the wrong way. Flip it around and try again.
 
 I was getting an error message relating to the USB port/driver in my laptop where the cable was plugged in. The option for me to select which port I was using in the IDE was grayed out. I downloaded [Zadig](https://zadig.akeo.ie/), which installs a USB driver. Once the Zadig window comes up, use the up/down arrows to select a driver. I chose libusbK. 
-<!-- insert picture -->
+<div>
+    <img src="https://github.com/user-attachments/assets/53f41b1f-6303-4690-9f7a-5298106a26b4" style="float:left; width:400px" alt="Choosing driver in Zadig"/>
+</div>
+<div clear: both> </div>
 
 Back in the Arduino IDE, I now had the option to select a port. Only one option came up for me: COM3, so I selected this, tried to burn a bootloader again, and it worked! 
 
 #### Testing
 
-To test it out, I uploaded a simple example program to see if the board would follow its instructions. I disconnected the programmer, and instead used the USB-C cable to connect the logger to my computer. 
+To test whether burning the bootloader had worked, I uploaded an example program to the board. I disconnected the programmer, and instead used the USB-C cable to connect the logger to my computer. 
 <!-- insert picture of plugged in -->
 
-A simple example program to test was at **File > Examples > 01.Basics > Blink**. As the documentation says, it turns the LED on the board on for a second, and off for a second repeatedly. I uploaded this to the logger by going to **Sketch > Upload**, and saw that the Arduino LED was blinking like expected.
+A simple example program to test was at **File > Examples > 01.Basics > Blink**. As its documentation says, it turns the LED on the board on for a second, and off for a second repeatedly. I uploaded this to the logger by going to **Sketch > Upload**, and saw that the Arduino LED was blinking like expected.
 
 
 

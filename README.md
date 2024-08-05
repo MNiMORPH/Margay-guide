@@ -5,9 +5,9 @@ A guide on setting up and potentially troubleshooting a Margay data logger. A mo
 
 I started by gathering all the materials I'd need.
 
-- Margay data logger (ATMega 1284p 8 MHz)
+- Margay data logger (Mine was ATMega 1284p 8 MHz)
     - This is a small data logger that will eventually collect data in the field, but it needs to be set up and programmed before it can do that.
-- Programmer (AVR ISP mkll)
+- Programmer (Mine was the AVR ISP mkll)
     - This is a device that will allow us to **burn a bootloader** (I'll define this below) onto the Margay board.
 - USB-B cable
     - This is used to connect the programmer to the laptop. 
@@ -17,8 +17,16 @@ I started by gathering all the materials I'd need.
     - To download softwares and upload programs to the Margay logger.
  
 <div>
-    <img src="https://github.com/user-attachments/assets/94785e2c-cfe8-4ff8-8d98-bc7777cd5f79" style="float:left; width:300px; height:300px; overflow:hidden" alt="Choosing driver in Zadig"/>
-    <img src="https://github.com/user-attachments/assets/e82422a4-9de9-45f3-a0f7-4397bf304e4e" style="float:right; height:300px" alt="Choosing driver in Zadig"/>
+    <figure>
+        <img src="https://github.com/user-attachments/assets/94785e2c-cfe8-4ff8-8d98-bc7777cd5f79" style="float:left; width:300px; height:300px; overflow:hidden" alt="Choosing driver in Zadig"/>
+        <figcaption> Margay logger </figcaption>
+    </figure>
+    <figure>
+        <img src="https://github.com/user-attachments/assets/e82422a4-9de9-45f3-a0f7-4397bf304e4e" style="float:right; height:300px" alt="Choosing driver in Zadig"/>
+        <figcaption> Programmer </figcaption>
+    </figure>
+    
+    
 </div>
 <div clear: both> </div>
 
@@ -39,7 +47,7 @@ A quick list of downloads I made, before going into more detail on each:
 
 I downloaded the [Arduino IDE](https://www.arduino.cc/en/software), which will be used to write programs in Arduino and upload them to the logger.
 
-Next, I downloaded the custom Northern Widget libraries found at the link https://github.com/NorthernWidget/NorthernWidget-libraries. There are detailed instructions in the readme, but I'll summarize here. First, I found where my Arduino libraries folder was. The standard location on Windows should be **My Documents\Arduino\libraries**. You can also find out by going to **File > Preferences** in the Arduino IDE, and looking at the Sketchbook location towards the top. For me, the Arduino folder in My Documents was empty (there was no libraries folder inside), but that was okay. 
+Next, I downloaded the custom Northern Widget libraries found at the link https://github.com/NorthernWidget/NorthernWidget-libraries. There are detailed instructions in the readme, but I'll summarize here. First, I found where my Arduino libraries folder was. The standard location on Windows should be **My Documents\Arduino\libraries**. You can also find out by going to **File > Preferences** in the Arduino IDE, and looking at the Sketchbook location towards the top. For me, the Arduino folder in My Documents was empty (there was no libraries folder inside), so I created a "libraries" folder as a subfolder in my sketchbook location.
 
 I downloaded the Northern Widget libraries using git so that updating them would be easier in the future, but had to download Git first ([available here](https://git-scm.com/downloads)). In the Git Bash application, I changed directories into my Arduino libraries folder, then went back to my browser and copied the link from the [NorthernWidget-libraries repository](https://github.com/NorthernWidget/NorthernWidget-libraries). (I clicked on the green **Code** button at the top of the page, then copied the link under the HTTPS option. More instructions for cloning in git are [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).) 
 <div>
@@ -51,7 +59,7 @@ In Git Bash, I entered
 
 `git clone https://github.com/NorthernWidget/NorthernWidget-libraries.git` 
 
-using the link I had just copied. When I checked my Arduino folder again, it now had a folder inside it called **NorthernWidget-libraries**.
+using the link I had just copied. When I checked my Arduino libraries folder again, it now had a folder inside it called **NorthernWidget-libraries**. However, this folder had multiple subfolders inside, each its own library (for example, the Margay library folder is inside the Northern Widget library folder.) For the Arduino IDE to recognize the individual libraries, take the subfolders out of the NorthernWidget folder, and move them directly into the Arduino libraries folder. You can check whether it worked by hovering over **Sketch > Include Library** in the IDE, and seeing which libraries you've added. 
 
 The last thing I downloaded was the SetTimeGUI, with download and running instructions on [this page](https://github.com/NorthernWidget/SetTime_GUI). For now, though, all I did was click the green Code button and use `git clone` to download the files in the repository (or you could download the zip file.) I needed to download [Processing](https://processing.org/download) too, in order to eventually run SetTime.
 

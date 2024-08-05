@@ -9,8 +9,10 @@ I started by gathering all the materials I'd need.
     - This is a small data logger that will eventually collect data in the field, but it needs to be set up and programmed before it can do that.
 - Programmer (AVR ISP mkll)
     - This is a device that will allow us to **burn a bootloader** (I'll define this below) onto the Margay board.
-- USB-C cable <!-- check if this is USB-C or micro-USB -->
-    - I used this to connect my laptop to the logger after initially burning a bootloader, to keep the logger connected to power. In the field, a battery would supply power.
+- USB-B cable
+    - This is used to connect the programmer to the laptop. 
+- USB-C cable
+    - This is used to connect the *logger* to the laptop after initially burning a bootloader, to keep the logger connected to power. In the field, a battery would supply power.
 - My laptop
     - To download softwares and upload programs to the Margay logger.
  
@@ -75,7 +77,7 @@ I also had to tell the IDE which programmer I was using. The programmer is only 
 ### Burning the bootloader
 
 Use the USB cable to connect your programmer to your computer. Also plug the programmer's ribbon cable into the Margay board, where the 2x3 pin header is. The ribbon should lie across the board rather than bumping against the ridge at the end of the board. However, it can be easy to mix this up, so just try again the other way if burning the bootloader fails.
-<!-- insert picture here -->
+
 Then go to **Tools > Burn Bootloader** in the Arduino IDE, and you should find out within a few seconds whether it worked. 
 
 #### Troubleshooting

@@ -32,7 +32,7 @@ I started by gathering all the materials I'd need.
 
 #### What is "burning a bootloader"? 
 
-This just means that you make your Arduino board capable of receiving computer programs through a USB cable. You do not have to make any physical changes to the board to enable this! All you have to do is connect the board to your computer using the programmer (mentioned in the materials list), configure a few things in a software on your computer, and click a button. Then the board will have this ability from now on, so you won't have to do this more than once.
+This just means that you make your Arduino board capable of receiving computer programs through a USB cable. You do not have to make any physical changes on the board to enable this. All you have to do is connect the board to your computer using the programmer (mentioned in the materials list) and install/configure a software on your computer. Then the board will have this ability from now on, so you won't have to do this more than once.
 
 Most of this guide is about what you need to download on your computer in order to do this, and how you need to configure it.
 
@@ -88,7 +88,7 @@ Use the USB cable to connect your programmer to your computer. Also plug the pro
 
 Then go to **Tools > Burn Bootloader** in the Arduino IDE, and you should find out within a few seconds whether it worked. 
 
-#### Troubleshooting
+##### Troubleshooting
 
 If it didn't work, the most common reason is that the programmer's cable is plugged into the board the wrong way. Flip it around and try again.
 
@@ -100,15 +100,48 @@ I was getting an error message relating to the USB port/driver in my laptop wher
 
 Back in the Arduino IDE, I now had the option to select a port. Only one option came up for me: COM3, so I selected this, tried to burn a bootloader again, and it worked! 
 
-#### Testing
+### Testing
 
 To test whether burning the bootloader had worked, I uploaded an example program to the board. I disconnected the programmer, and instead used the USB-C cable to connect the logger to my computer. 
 <!-- insert picture of plugged in -->
 
 A simple example program to test was at **File > Examples > 01.Basics > Blink**. As its documentation says, it turns the LED on the board on for a second, and off for a second repeatedly. I uploaded this to the logger by going to **Sketch > Upload**, and saw that the Arduino LED was blinking like expected.
 
+#### _Margay-compatible program_
 
+You'll need to upload a Margay-compatible program to the logger before you can set its clock. A Margay-compatible program is anything with the line `#include "Margay.h"`. 
 
+One of these programs can be found by going to **File > Examples > Margay_Library > MargayDemo** in the Arduino IDE. Compile and upload this to the logger, and the LED may show a series of different colors. You can find out what they mean [here](https://github.com/NorthernWidget/Margay_Library). 
+
+##### Troubleshooting
+
+At the time that I compiled MargayDemo (August 2024), there were a few small syntax errors involving capitalization. These will probably be changed by now, but in case there's another program you're trying to compile that hasn't been updated, this is what to do if you get these error messages. 
+- "Model_0v0" should be "MODEL_2v2". This error was in line 13, which at the time said `Margay Logger(Model_0v0);`. You can go into Margay.h (which you can open with the Notepad app on Windows), and the different options are under "enum board". This is what the error said:
+    ```
+     13:15: error: 'Model_0v0' was not declared in this scope
+     Margay Logger(Model_0v0)
+     13:15: note: suggested alternative: 'MODEL_0v0'
+     Margay Logger(Model_0v0);
+                   ^~~~~~~~~
+                   MODEL_0v0
+    ```
+- "Logger.Run" should be "Logger.run". This error happened in line 21, which originally read `Logger.run(Update, UpdateRate);`, and the error message was:
+
+    ```
+    21:10: error: 'class Margay' has no member named 'Run'; did you mean 'run'?
+    Logger.Run(Update, UpdateRate);
+          ^~~
+          Run
+    ```
+- This last error was a very weird fringe case. I'll start with the error message:
+
+  ```
+   156:3: error: 'MCP3421' does not name a type; did you mean 'CMCP3421'?
+   MCP3421 adc;
+   ^~~~~~~
+   CMCP3421
+   ```
+  The error message mentioned MCP3421, which is a library included in the download from Northern Widget. However, when I opened the file MCP3421.h, the documentation said that Dirk Ohme created it. This means I somehow had Arduino's built-in MCP3421 library, instead of the Northern Widget library with the same name. I'm not entirely sure how I ended up with the wrong version, but a guess is that Arduino auto-installed it when a different library tried to import MCP3421 but couldn't find it. Then the auto-installed version must have overwritten the Northern Widget version. Anyway, the NW version should say it was written by Bobby Schulz. So if yours is the default Arduino version, delete it and re-install the Northern Widget MCP3421 library. 
 
 
 

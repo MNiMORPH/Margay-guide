@@ -143,6 +143,14 @@ At the time that I compiled MargayDemo (August 2024), there were a few small syn
    ```
   The error message mentioned MCP3421, which is a library included in the download from Northern Widget. However, when I opened the file MCP3421.h, the documentation said that Dirk Ohme created it. This means I somehow had Arduino's built-in MCP3421 library, instead of the Northern Widget library with the same name. I'm not entirely sure how I ended up with the wrong version, but a guess is that Arduino auto-installed it when a different library tried to import MCP3421 but couldn't find it. Then the auto-installed version must have overwritten the Northern Widget version. Anyway, the NW version should say it was written by Bobby Schulz. So if yours is the default Arduino version, delete it and re-install the Northern Widget MCP3421 library. 
 
+#### SetTime GUI
+
+We downloaded this earlier, and now we can actually run it to set the time on the logger's clock. While your Margay logger is still plugged into your computer, open Processing (which we also downloaded earlier) and pull up the program NW_Logger_TimeSet.pde. Run this, and a window should appear on your screen with the computer time, logger time, and difference between them. Click the button to set the logger time, and the logger time should now match your computer time. Then you can close the program and unplug your logger. A video with all of these instructions is [here](https://youtu.be/q0fVwhMNLZg).
+
+### Preparing for deployment
+
+<!-- the SD card (file and image)
+Picture of the BME sensor plugged in -->
 
 
 

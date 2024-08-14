@@ -61,6 +61,8 @@ In Git Bash, I entered
 
 using the link I had just copied. When I checked my Arduino libraries folder again, it now had a folder inside it called **NorthernWidget-libraries**. However, this folder had multiple subfolders inside, each its own library (for example, the Margay library folder is inside the Northern Widget library folder.) For the Arduino IDE to recognize the individual libraries, take the subfolders out of the NorthernWidget folder, and move them directly into the Arduino libraries folder. You can check whether it worked by hovering over **Sketch > Include Library** in the IDE, and seeing which libraries you've added. 
 
+_Note: At the time of writing this, one of the Northern Widget libraries (MCP3421) has the same name as a default Arduino library. Sometimes, when I open the IDE, it tells me that updates are automatically available for this library, which really means it's trying to replace the Northern Widget version with the default Arduino version. This will cause issues later. So, don't accept any updates that it tries to push for MCP3421. You can see which libraries it's trying to update by clicking "Install Manually" when you get that notification._
+
 The last thing I downloaded was the SetTimeGUI, with download and running instructions on [this page](https://github.com/NorthernWidget/SetTime_GUI). For now, though, all I did was click the green Code button and use `git clone` to download the files in the repository (or you could download the zip file.) I needed to download [Processing](https://processing.org/download) too, in order to eventually run SetTime.
 
 We should now have all the downloads we need, and only need to change some settings before we can start programming!
@@ -133,7 +135,7 @@ At the time that I compiled MargayDemo (August 2024), there were a few small syn
           ^~~
           Run
     ```
-- This last error was a very weird fringe case. I'll start with the error message:
+- This last error was the result of me automatically saying yes when Arduino asked me if I wanted to install the available updates for my libraries (it asks this when I open the IDE). I mentioned this in the "Software and library downloads" section, but the Northern Widget libraries include a library called MCP3421, which shares a name with Arduino's built-in MCP3421 library. The NW version has version number 1.0.0, and the Arduino version has number 1.0.4 (at the time of writing this), so it thought I was running an older version of its built-in library. When I accepted the update, it replaced the Northern Widget file with the default Arduino file. This is the error message I got as a result:
 
   ```
    156:3: error: 'MCP3421' does not name a type; did you mean 'CMCP3421'?
@@ -141,7 +143,7 @@ At the time that I compiled MargayDemo (August 2024), there were a few small syn
    ^~~~~~~
    CMCP3421
    ```
-  The error message mentioned MCP3421, which is a library included in the download from Northern Widget. However, when I opened the file MCP3421.h, the documentation said that Dirk Ohme created it. This means I somehow had Arduino's built-in MCP3421 library, instead of the Northern Widget library with the same name. I'm not entirely sure how I ended up with the wrong version, but a guess is that Arduino auto-installed it when a different library tried to import MCP3421 but couldn't find it. Then the auto-installed version must have overwritten the Northern Widget version. Anyway, the NW version should say it was written by Bobby Schulz. So if yours is the default Arduino version, delete it and re-install the Northern Widget MCP3421 library. 
+If your error message mentions MCP3421, open the file MCP3421.h inside your libraries location, and read the documentation. If it says Dirk Ohme created it, you have the built-in version (the wrong version), so delete it and re-install the Northern Widget MCP3421 library. The NW version of MCP3421.h should say it was written by Bobby Schulz in the documentation.
 
 #### SetTime GUI
 

@@ -25,8 +25,6 @@ I started by gathering all the materials I'd need.
         <img src="https://github.com/user-attachments/assets/e82422a4-9de9-45f3-a0f7-4397bf304e4e" style="float:right; height:300px" alt="Choosing driver in Zadig"/>
         <figcaption> Programmer </figcaption>
     </figure>
-    
-    
 </div>
 <div clear: both> </div>
 
@@ -151,8 +149,24 @@ We downloaded this earlier, and now we can actually run it to set the time on th
 
 ### Preparing for deployment
 
-<!-- the SD card (file and image)
-Picture of the BME sensor plugged in -->
+#### The SD card
+Insert this into the logger to record data, then insert it into your computer to read the data. You might need an adapter for your computer. The data will appear as a text file. 
+
+<div>
+    <img src="https://github.com/user-attachments/assets/cb14742a-a759-43d9-a3e9-4d3065692ad1" style="float:left; width:200px" alt="SD card setup"/>
+</div>
+<div clear: both> </div>
+
+#### BME 280 sensor
+This is an external sensor you can attach to read temperature, pressure, and humidity.
+
+<div>
+    <img src="https://github.com/user-attachments/assets/1be07783-75ea-4def-a1d5-b451ca918b99" style="float:left; width:400px; height:400px; overflow:hidden" alt="BME 280 setup"/>
+</div>
+
+<div clear: both> </div>
+
+
 
 
 

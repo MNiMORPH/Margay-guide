@@ -1,5 +1,5 @@
 # Margay-guide
-A guide on setting up and potentially troubleshooting a Margay data logger. A more thorough version of this exists [here](https://northernwidget.com/tutorial/), but this is written from the perspective of someone who's new to using Arduino boards and shows some of the issues/questions I had when getting started. 
+A guide on setting up and potentially troubleshooting a Margay data logger. A more thorough version of this exists [here](https://northernwidget.com/tutorial/), but my guide is written from the perspective of someone who's new to using Arduino boards and shows some of the issues/questions I had when getting started. 
 
 ### Physical materials needed
 
@@ -12,7 +12,7 @@ I started by gathering all the materials I'd need.
 - USB-B cable
     - This is used to connect the programmer to the laptop. 
 - USB-C cable
-    - This is used to connect the *logger* to the laptop after initially burning a bootloader, to keep the logger connected to power. In the field, a battery would supply power.
+    - This is used to connect the logger to the laptop after initially burning a bootloader, and will keep the logger connected to power. In the field, a battery would supply power.
 - My laptop
     - To download softwares and upload programs to the Margay logger.
  
@@ -30,7 +30,7 @@ I started by gathering all the materials I'd need.
 
 #### What is "burning a bootloader"? 
 
-This just means that you make your Arduino board capable of receiving computer programs through a USB cable. You do not have to make any physical changes on the board to enable this. All you have to do is connect the board to your computer using the programmer (mentioned in the materials list) and install/configure a software on your computer. Then the board will have this ability from now on, so you won't have to do this more than once.
+This just means that you make your Arduino board capable of receiving computer programs through a USB cable. You do not have to make any physical changes on the board to enable this. All you have to do is connect the board to your computer using the programmer (mentioned in the materials list) and install/configure some software on your computer. Then the board will have this ability from now on, so you won't have to do this more than once.
 
 Most of this guide is about what you need to download on your computer in order to do this, and how you need to configure it.
 
@@ -45,7 +45,7 @@ A quick list of downloads I made, before going into more detail on each:
 
 I downloaded the [Arduino IDE](https://www.arduino.cc/en/software), which will be used to write programs in Arduino and upload them to the logger.
 
-Next, I downloaded the custom Northern Widget libraries found at the link https://github.com/NorthernWidget/NorthernWidget-libraries. There are detailed instructions in the readme, but I'll summarize here. First, I found where my Arduino libraries folder was. The standard location on Windows should be **My Documents\Arduino\libraries**. You can also find out by going to **File > Preferences** in the Arduino IDE, and looking at the Sketchbook location towards the top. For me, the Arduino folder in My Documents was empty (there was no libraries folder inside), so I created a "libraries" folder as a subfolder in my sketchbook location.
+Next, I downloaded the custom Northern Widget libraries found at the link https://github.com/NorthernWidget/NorthernWidget-libraries. There are detailed instructions in the readme, but I'll summarize here. First, I found where my Arduino libraries folder was. The standard location on Windows should be **My Documents\Arduino\libraries**. You can also find out by going to **File > Preferences** in the Arduino IDE, and looking at the Sketchbook location towards the top. Your libraries folder should be inside your sketchbook. For me, there was an Arduino folder in My Documents, but it was empty (there was no libraries folder inside). So, I created a "libraries" folder myself.
 
 I downloaded the Northern Widget libraries using git so that updating them would be easier in the future, but had to download Git first ([available here](https://git-scm.com/downloads)). In the Git Bash application, I changed directories into my Arduino libraries folder, then went back to my browser and copied the link from the [NorthernWidget-libraries repository](https://github.com/NorthernWidget/NorthernWidget-libraries). (I clicked on the green **Code** button at the top of the page, then copied the link under the HTTPS option. More instructions for cloning in git are [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).) 
 <div>
@@ -59,16 +59,16 @@ In Git Bash, I entered
 
 using the link I had just copied. When I checked my Arduino libraries folder again, it now had a folder inside it called **NorthernWidget-libraries**. However, this folder had multiple subfolders inside, each its own library (for example, the Margay library folder is inside the Northern Widget library folder.) For the Arduino IDE to recognize the individual libraries, take the subfolders out of the NorthernWidget folder, and move them directly into the Arduino libraries folder. You can check whether it worked by hovering over **Sketch > Include Library** in the IDE, and seeing which libraries you've added. 
 
-_Note: At the time of writing this, one of the Northern Widget libraries (MCP3421) has the same name as a default Arduino library. Sometimes, when I open the IDE, it tells me that updates are automatically available for this library, which really means it's trying to replace the Northern Widget version with the default Arduino version. This will cause issues later. So, don't accept any updates that it tries to push for MCP3421. You can see which libraries it's trying to update by clicking "Install Manually" when you get that notification._
+_Note: At the time of writing this, one of the Northern Widget libraries (MCP3421) has the same name as a default Arduino library. Sometimes when I open the IDE, it tells me that updates are automatically available for this library, which really means it's trying to replace the Northern Widget version with the default Arduino version. This will cause issues later. So, don't accept any updates that it tries to push for MCP3421. You can see which libraries it's trying to update by clicking "Install Manually" when you get that notification._
 
-The last thing I downloaded was the SetTimeGUI, with download and running instructions on [this page](https://github.com/NorthernWidget/SetTime_GUI). For now, though, all I did was click the green Code button and use `git clone` to download the files in the repository (or you could download the zip file.) I needed to download [Processing](https://processing.org/download) too, in order to eventually run SetTime.
+The last thing I downloaded was the SetTimeGUI, with download and running instructions on [this page](https://github.com/NorthernWidget/SetTime_GUI). For now, though, all I did was click the green Code button on that page and used `git clone` to download the files in the repository (or you could download the zip file.) I needed to download [Processing](https://processing.org/download) too, in order to eventually run SetTime.
 
-We should now have all the downloads we need, and only need to change some settings before we can start programming!
+We should now have all the downloads we need, and only need to change some settings before we can start programming.
 
 ### Board, programmer, and port definitions
 All of these changes are made in the Arduino IDE. 
 
-Since I was using a Margay data logger (a board compatible with Arduino but considered a third-party instead of a standard Arduino board), I needed to configure some settings so that the IDE would recognize the board. A [guide](https://github.com/NorthernWidget/Arduino_Boards) for this already exists (with pictures), but I'll still summarize the steps I took. 
+Since I was using a Margay data logger (a board compatible with Arduino but considered third-party instead of a standard Arduino board), I needed to configure some settings so that the IDE would recognize the board. A [guide](https://github.com/NorthernWidget/Arduino_Boards) for this already exists (with pictures), but I'll still summarize the steps I took. 
 
 I went to **File > Preferences** in the IDE, and a window popped up, with "Additional Boards Manager URLs" towards the bottom. The field to enter text was empty for me at first, but I copy-pasted the following URL into that field and saved changes with **OK**. 
 ######
@@ -78,13 +78,16 @@ Then, I went to **Tools > Board > Boards Manager**, and it opened a panel on the
 
 Now it was time to select which board I was using. The Margay logger has two versions: ATMega1284p 8MHz (the current version, so it's most likely this one), or ATMega644p 8MHz (older). If you're not sure, this is printed in really small font on the logger (I circled it in red in the picture below.) Mine was the 1284p. I made this selection in the IDE by going to **Tools > Board > Northern Widget Data Logger AVR Boards > ATMega1284p 8MHz**. 
 
-<!-- Insert picture of 1284p here -->
+<div>
+    <img src="https://github.com/user-attachments/assets/e0cb7d76-0d3d-4603-87cb-fc79783bca4d" style="float:left; width:400px" alt="Front of Margay logger"/>
+</div>
+<div clear: both> </div>
 
 I also had to tell the IDE which programmer I was using. The programmer is only necessary if this is the first time you're using your data logger, since we use the programmer to burn a bootloader (and again, we only have to do this once). The programmer should have a label on it to let you know which one it is - mine was the AVR ISP mkII. I selected this in **Tools > Programmer**.
 
 ### Burning the bootloader
 
-Use the USB cable to connect your programmer to your computer. Also plug the programmer's ribbon cable into the Margay board, where the 2x3 pin header is. The ribbon should lie across the board rather than bumping against the ridge at the end of the board. However, it can be easy to mix this up, so just try again the other way if burning the bootloader fails.
+Use the USB-B cable to connect your programmer to your computer. Also plug the programmer's ribbon cable into the Margay board, where the 2x3 pin header is. The ribbon should lie across the board rather than bumping against the ridge at the end of the board. However, it can be easy to mix this up, so just try again the other way if burning the bootloader fails.
 
 Then go to **Tools > Burn Bootloader** in the Arduino IDE, and you should find out within a few seconds whether it worked. 
 
@@ -98,25 +101,28 @@ I was getting an error message relating to the USB port/driver in my laptop wher
 </div>
 <div clear: both> </div>
 
-Back in the Arduino IDE, I now had the option to select a port. Only one option came up for me: COM3, so I selected this, tried to burn a bootloader again, and it worked! 
+Back in the Arduino IDE, I now had the option to select a port. Only one option came up for me: COM3, so I selected this, tried to burn a bootloader again, and this time it worked.
 
 ### Testing
 
 To test whether burning the bootloader had worked, I uploaded an example program to the board. I disconnected the programmer, and instead used the USB-C cable to connect the logger to my computer. 
-<!-- insert picture of plugged in -->
+<div>
+    <img src="https://github.com/user-attachments/assets/340621e1-55e9-4aee-bd74-4923eeb59641" style="float:left; height:300px" alt=”Plugged in logger”/>
+</div>
+<div clear: both> </div>
 
 A simple example program to test was at **File > Examples > 01.Basics > Blink**. As its documentation says, it turns the LED on the board on for a second, and off for a second repeatedly. I uploaded this to the logger by going to **Sketch > Upload**, and saw that the Arduino LED was blinking like expected.
 
 #### _Margay-compatible program_
 
-You'll need to upload a Margay-compatible program to the logger before you can set its clock. A Margay-compatible program is anything with the line `#include "Margay.h"`. 
+You'll also need to upload a Margay-compatible program to the logger before you can set its clock. A Margay-compatible program is anything with the line `#include "Margay.h"`. 
 
 One of these programs can be found by going to **File > Examples > Margay_Library > MargayDemo** in the Arduino IDE. Compile and upload this to the logger, and the LED may show a series of different colors. You can find out what they mean [here](https://github.com/NorthernWidget/Margay_Library). 
 
 ##### Troubleshooting
 
 At the time that I compiled MargayDemo (August 2024), there were a few small syntax errors involving capitalization. These will probably be changed by now, but in case there's another program you're trying to compile that hasn't been updated, this is what to do if you get these error messages. 
-- "Model_0v0" should be "MODEL_2v2". This error was in line 13, which at the time said `Margay Logger(Model_0v0);`. You can go into Margay.h (which you can open with the Notepad app on Windows), and the different options are under "enum board". This is what the error said:
+- "Model_0v0" should be "MODEL_2v2". (You can also go into Margay.h (which you can open with the Notepad app on Windows), and the different options for the model versions are under "enum board".) This error was in line 13 of MargayDemo, which at the time said `Margay Logger(Model_0v0);`.  This is what the error said:
     ```
      13:15: error: 'Model_0v0' was not declared in this scope
      Margay Logger(Model_0v0)
@@ -141,7 +147,7 @@ At the time that I compiled MargayDemo (August 2024), there were a few small syn
    ^~~~~~~
    CMCP3421
    ```
-If your error message mentions MCP3421, open the file MCP3421.h inside your libraries location, and read the documentation. If it says Dirk Ohme created it, you have the built-in version (the wrong version), so delete it and re-install the Northern Widget MCP3421 library. The NW version of MCP3421.h should say it was written by Bobby Schulz in the documentation.
+If your error message mentions MCP3421, open the file MCP3421.h inside your libraries location, and read the documentation. If it says Dirk Ohme created it, you have the built-in version (the wrong version), so delete it and re-install the Northern Widget MCP3421 library. The NW version of MCP3421.h should say it was written by Bobby Schulz.
 
 #### SetTime GUI
 
@@ -150,19 +156,21 @@ We downloaded this earlier, and now we can actually run it to set the time on th
 ### Preparing for deployment
 
 #### The SD card
-Insert this into the logger to record data, then insert it into your computer to read the data. You might need an adapter for your computer. The data will appear as a text file. 
+Insert this into the logger to record data, then insert it into your computer to read the data. You might need a USB-SD card reader in order to insert it into your computer. Once you have done this, the data will appear on your computer as a text file. 
 
 <div>
     <figure>
         <img src="https://github.com/user-attachments/assets/cb14742a-a759-43d9-a3e9-4d3065692ad1" style="float:left; width:200px" alt="SD card setup"/>
-        <figcaption> The SD card will insert into the silver slot on the logger. The adapter is in bottom right and has a slot in the side for the SD card. </figcaption>
+        <figcaption> The SD card will insert into the silver slot on the logger. The SD card reader is in bottom right and has a slot in the side for the SD card. </figcaption>
     </figure>
 </div>
+
 <div clear: both> </div>
+
 After running MargayDemo with the SD card in, the data was saved in [this text file](NoSensors.txt).
 
 #### BME 280 sensor
-This is an external sensor you can attach to read temperature, pressure, and humidity. The wires should be inserted in the same place for both the sensor and the board: the black connects "GND" to "GND", green goes from "SCK" to "SCL", and white from "SDI" to "SDA".
+This is an external sensor you can attach to read temperature, pressure, and humidity. The wires should be inserted in the same place for both the sensor and the board: the black connects "GND" to "GND", green goes from "SCK" on the sensor to "SCL" on the board, and white from "SDI" to "SDA".
 
 <div>
     <img src="https://github.com/user-attachments/assets/1be07783-75ea-4def-a1d5-b451ca918b99" style="float:left; width:400px" alt="BME 280 setup"/>
@@ -170,7 +178,7 @@ This is an external sensor you can attach to read temperature, pressure, and hum
 
 <div clear: both> </div>
 
-Northern Widget has Arduino programs for deployments as well, linked [here](https://github.com/NorthernWidget/Deployments/tree/master/Margay). I ran the one in the BME280 folder. Now the text file from the SD card has two measurements of temperature, one from the on-board sensor and one from the external one. [Here](BME280.txt) is an example text file.
+Northern Widget has Arduino programs for deployments as well, linked [here](https://github.com/NorthernWidget/Deployments/tree/master/Margay). I ran the one in the BME280 folder. Now the text file from the SD card has two measurements of temperature, one from the on-board sensor and one from the external one. [Here](BME280.txt) is an example text file of what that looks like.
 
 
 

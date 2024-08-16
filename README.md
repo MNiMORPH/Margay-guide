@@ -159,7 +159,7 @@ Insert this into the logger to record data, then insert it into your computer to
     </figure>
 </div>
 <div clear: both> </div>
-
+After running MargayDemo with the SD card in, the data was saved in [this text file](NoSensors.txt).
 
 #### BME 280 sensor
 This is an external sensor you can attach to read temperature, pressure, and humidity. The wires should be inserted in the same place for both the sensor and the board: the black connects "GND" to "GND", green goes from "SCK" to "SCL", and white from "SDI" to "SDA".
@@ -170,7 +170,7 @@ This is an external sensor you can attach to read temperature, pressure, and hum
 
 <div clear: both> </div>
 
-Northern Widget has Arduino programs for deployments as well, linked [here](https://github.com/NorthernWidget/Deployments/tree/master/Margay). I ran the one in the BME280 folder. Now the text file from the SD card has two measurements of temperature, one from the on-board sensor and one from the external one. 
+Northern Widget has Arduino programs for deployments as well, linked [here](https://github.com/NorthernWidget/Deployments/tree/master/Margay). I ran the one in the BME280 folder. Now the text file from the SD card has two measurements of temperature, one from the on-board sensor and one from the external one. [Here](BME280.txt) is an example text file.
 
 
 

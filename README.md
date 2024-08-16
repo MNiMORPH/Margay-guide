@@ -153,20 +153,24 @@ We downloaded this earlier, and now we can actually run it to set the time on th
 Insert this into the logger to record data, then insert it into your computer to read the data. You might need an adapter for your computer. The data will appear as a text file. 
 
 <div>
-    <img src="https://github.com/user-attachments/assets/cb14742a-a759-43d9-a3e9-4d3065692ad1" style="float:left; width:200px" alt="SD card setup"/>
+    <figure>
+        <img src="https://github.com/user-attachments/assets/cb14742a-a759-43d9-a3e9-4d3065692ad1" style="float:left; width:200px" alt="SD card setup"/>
+        <figcaption> The SD card will insert into the silver slot on the logger. The adapter is in bottom right and has a slot in the side for the SD card. </figcaption>
+    </figure>
 </div>
 <div clear: both> </div>
+
 
 #### BME 280 sensor
-This is an external sensor you can attach to read temperature, pressure, and humidity.
+This is an external sensor you can attach to read temperature, pressure, and humidity. The wires should be inserted in the same place for both the sensor and the board: the black connects "GND" to "GND", green goes from "SCK" to "SCL", and white from "SDI" to "SDA".
 
 <div>
-    <img src="https://github.com/user-attachments/assets/1be07783-75ea-4def-a1d5-b451ca918b99" style="float:left; width:400px; height:400px; overflow:hidden" alt="BME 280 setup"/>
+    <img src="https://github.com/user-attachments/assets/1be07783-75ea-4def-a1d5-b451ca918b99" style="float:left; width:400px" alt="BME 280 setup"/>
 </div>
 
 <div clear: both> </div>
 
-
+Northern Widget has Arduino programs for deployments as well, linked [here](https://github.com/NorthernWidget/Deployments/tree/master/Margay). I ran the one in the BME280 folder. Now the text file from the SD card has two measurements of temperature, one from the on-board sensor and one from the external one. 
 
 
 

@@ -1,7 +1,7 @@
 # Margay-guide
 A guide on setting up and potentially troubleshooting a Margay data logger. A more thorough version of this exists [here](https://northernwidget.com/tutorial/), but my guide is written from the perspective of someone who's new to using Arduino boards and shows some of the issues/questions I had when getting started. 
 
-### Physical materials needed
+## Physical materials needed
 
 I started by gathering all the materials I'd need.
 
@@ -28,13 +28,13 @@ I started by gathering all the materials I'd need.
 </div>
 <div clear: both> </div>
 
-#### What is "burning a bootloader"? 
+### What is "burning a bootloader"? 
 
 This just means that you make your Arduino board capable of receiving computer programs through a USB cable. You do not have to make any physical changes on the board to enable this. All you have to do is connect the board to your computer using the programmer (mentioned in the materials list) and install/configure some software on your computer. Then the board will have this ability from now on, so you won't have to do this more than once.
 
 Most of this guide is about what you need to download on your computer in order to do this, and how you need to configure it.
 
-### Software and library downloads
+## Software and library downloads
 
 A quick list of downloads I made, before going into more detail on each:
 - Arduino IDE
@@ -65,7 +65,7 @@ The last thing I downloaded was the SetTimeGUI, with download and running instru
 
 We should now have all the downloads we need, and only need to change some settings before we can start programming.
 
-### Board, programmer, and port definitions
+## Board, programmer, and port definitions
 All of these changes are made in the Arduino IDE. 
 
 Since I was using a Margay data logger (a board compatible with Arduino but considered third-party instead of a standard Arduino board), I needed to configure some settings so that the IDE would recognize the board. A [guide](https://github.com/NorthernWidget/Arduino_Boards) for this already exists (with pictures), but I'll still summarize the steps I took. 
@@ -85,13 +85,13 @@ Now it was time to select which board I was using. The Margay logger has two ver
 
 I also had to tell the IDE which programmer I was using. The programmer is only necessary if this is the first time you're using your data logger, since we use the programmer to burn a bootloader (and again, we only have to do this once). The programmer should have a label on it to let you know which one it is - mine was the AVR ISP mkII. I selected this in **Tools > Programmer**.
 
-### Burning the bootloader
+## Burning the bootloader
 
 Use the USB-B cable to connect your programmer to your computer. Also plug the programmer's ribbon cable into the Margay board, where the 2x3 pin header is. The ribbon should lie across the board rather than bumping against the ridge at the end of the board. However, it can be easy to mix this up, so just try again the other way if burning the bootloader fails.
 
 Then go to **Tools > Burn Bootloader** in the Arduino IDE, and you should find out within a few seconds whether it worked. 
 
-##### Troubleshooting
+#### Troubleshooting
 
 If it didn't work, the most common reason is that the programmer's cable is plugged into the board the wrong way. Flip it around and try again.
 
@@ -103,7 +103,7 @@ I was getting an error message relating to the USB port/driver in my laptop wher
 
 Back in the Arduino IDE, I now had the option to select a port. Only one option came up for me: COM3, so I selected this, tried to burn a bootloader again, and this time it worked.
 
-### Testing
+## Testing
 
 To test whether burning the bootloader had worked, I uploaded an example program to the board. I disconnected the programmer, and instead used the USB-C cable to connect the logger to my computer. 
 <div>
@@ -113,13 +113,13 @@ To test whether burning the bootloader had worked, I uploaded an example program
 
 A simple example program to test was at **File > Examples > 01.Basics > Blink**. As its documentation says, it turns the LED on the board on for a second, and off for a second repeatedly. I uploaded this to the logger by going to **Sketch > Upload**, and saw that the Arduino LED was blinking like expected.
 
-#### _Margay-compatible program_
+### _Margay-compatible program_
 
 You'll also need to upload a Margay-compatible program to the logger before you can set its clock. A Margay-compatible program is anything with the line `#include "Margay.h"`. 
 
 One of these programs can be found by going to **File > Examples > Margay_Library > MargayDemo** in the Arduino IDE. Compile and upload this to the logger, and the LED may show a series of different colors. You can find out what they mean [here](https://github.com/NorthernWidget/Margay_Library). 
 
-##### Troubleshooting
+#### Troubleshooting
 
 At the time that I compiled MargayDemo (August 2024), there were a few small syntax errors involving capitalization. These will probably be changed by now, but in case there's another program you're trying to compile that hasn't been updated, this is what to do if you get these error messages. 
 - "Model_0v0" should be "MODEL_2v2". (You can also go into Margay.h (which you can open with the Notepad app on Windows), and the different options for the model versions are under "enum board".) This error was in line 13 of MargayDemo, which at the time said `Margay Logger(Model_0v0);`.  This is what the error said:
@@ -149,14 +149,19 @@ At the time that I compiled MargayDemo (August 2024), there were a few small syn
    ```
 If your error message mentions MCP3421, open the file MCP3421.h inside your libraries location, and read the documentation. If it says Dirk Ohme created it, you have the built-in version (the wrong version), so delete it and re-install the Northern Widget MCP3421 library. The NW version of MCP3421.h should say it was written by Bobby Schulz.
 
-#### SetTime GUI
+### SetTime GUI
 
 We downloaded this earlier, and now we can actually run it to set the time on the logger's clock. While your Margay logger is still plugged into your computer, open Processing (which we also downloaded earlier) and pull up the program NW_Logger_TimeSet.pde. Run this, and a window should appear on your screen with the computer time, logger time, and difference between them. Click the button to set the logger time, and the logger time should now match your computer time. Then you can close the program and unplug your logger. A video with all of these instructions is [here](https://youtu.be/q0fVwhMNLZg).
 
-### Preparing for deployment
+#### Coin-cell battery
 
-#### The SD card
-Insert this into the logger to record data, then insert it into your computer to read the data. You might need a USB-SD card reader in order to insert it into your computer. Once you have done this, the data will appear on your computer as a text file. 
+<!-- include a picture --> 
+<!-- say what it's for --> 
+
+## Preparing for deployment
+
+### The SD card
+Insert this into the logger to record data, then insert it into your computer to read the data. You'll use a USB-SD card reader in order to insert it into your computer. Once you have done this, the data will appear on your computer as a text file. 
 
 <div>
     <figure>
@@ -168,6 +173,13 @@ Insert this into the logger to record data, then insert it into your computer to
 <div clear: both> </div>
 
 After running MargayDemo with the SD card in, the data was saved in [this text file](NoSensors.txt).
+
+### Battery power
+
+<!-- picture of how it attaches, with screwdriver and side green cage -->
+<!-- explanation of how many batteries it needs and which ones, 
+
+### Sensors
 
 #### BME 280 sensor
 This is an external sensor you can attach to read temperature, pressure, and humidity. The wires should be inserted in the same place for both the sensor and the board: the black connects "GND" to "GND", green goes from "SCK" on the sensor to "SCL" on the board, and white from "SDI" to "SDA".

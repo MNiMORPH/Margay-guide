@@ -177,7 +177,7 @@ After running MargayDemo with the SD card in, the data was saved in [this text f
 ### Battery power
 
 <!-- picture of how it attaches, with screwdriver and side green cage -->
-<!-- explanation of how many batteries it needs and which ones, 
+<!-- explanation of how many batteries it needs and which ones, -->
 
 ### Sensors
 
@@ -191,6 +191,13 @@ This is an external sensor you can attach to read temperature, pressure, and hum
 <div clear: both> </div>
 
 Northern Widget has Arduino programs for deployments as well, linked [here](https://github.com/NorthernWidget/Deployments/tree/master/Margay). I ran the one in the BME280 folder. Now the text file from the SD card has two measurements of temperature, one from the on-board sensor and one from the external one. [Here](BME280.txt) is an example text file of what that looks like.
+
+#### Connecting to a Monarch
+
+<!-- what a Monarch measures, link to the page -->
+<!-- explanation of no bootloading but just uploading, and how to upload, what program to upload -->
+<!-- what program to upload to the Margay, and how to wire them together -->
+<!-- pictures of the finished setup -->
 
 
 

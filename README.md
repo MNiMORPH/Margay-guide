@@ -155,8 +155,8 @@ We downloaded this earlier, and now we can actually run it to set the time on th
 
 #### Coin-cell battery
 
+When setting the clock, insert the coin-cell battery into the logger. This doesn't take the place of battery power, but it's just so that the time you set will stay on the logger.
 <!-- include a picture --> 
-<!-- say what it's for --> 
 
 ## Preparing for deployment
 
@@ -176,8 +176,8 @@ After running MargayDemo with the SD card in, the data was saved in [this text f
 
 ### Battery power
 
+It is powered by 3 AA batteries and needs at least 3.3 V to continue logging. The red and black wires connect to B+ and B-, respectively.
 <!-- picture of how it attaches, with screwdriver and side green cage -->
-<!-- explanation of how many batteries it needs and which ones, -->
 
 ### Sensors
 
@@ -194,9 +194,18 @@ Northern Widget has Arduino programs for deployments as well, linked [here](http
 
 #### Connecting to a Monarch
 
-<!-- what a Monarch measures, link to the page -->
-<!-- explanation of no bootloading but just uploading, and how to upload, what program to upload -->
+The Monarch logger is a pyronometer measuring incoming radiation in UV, visible, and infrared wavelengths. Its repository can be found [here](https://github.com/NorthernWidget-Skunkworks/Project-Monarch/tree/master). You can connect a Margay logger to a Monarch sensor to have these additional fields in your data.
+
+You need to upload a program (also known as firmware) to a Monarch logger so it can take data, but you do *not* need to bootload the Monarch. You can just upload the program right away. Since it can't communicate using USB, you'll use the same programmer that was used earlier in this guide. 
+<!-- link here -->
+In the Arduino IDE, I opened the program v1_B. I needed to select what board I was using, as the Monarch is part of the ATTinyCore group. Just like how I added board definitions for the Margay in the earlier section
+<!-- link here -->
+, I also needed to add board definitions for the Monarch. I followed [these instructions](https://northernwidget.com/tutorial/#add-board-definitions-for-the-attinycore-microcontrollers), but basically I just went to **File > Preferences** and found "Additional boards manager URLs". Since I already had one URL in there, I clicked the button with the two overlapping rectangles, and entered the URL for the Monarch boards on a new line. The URL is: http://drazzy.com/package_drazzy.com_index.json
+In **Tools > Board > Boards Manager**, I searched for ATTinyCore and installed the one by Spence Konde. Now, I could select the board and programmer I was using. The board name for the Monarch is ATtiny841 (Micronucleus / Wattuino). Then, I chose **Sketch > Upload Using Programmer**. Even if it works, lights won't flash on the Monarch, but the IDE will still tell you if it was uploaded successfully.
+
+Then, I went back to the Margay and uploaded a program that would tell it to communicate with the Monarch. 
 <!-- what program to upload to the Margay, and how to wire them together -->
+<!-- 6-pin header -->
 <!-- pictures of the finished setup -->
 
 

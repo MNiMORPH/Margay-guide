@@ -103,6 +103,9 @@ I was getting an error message relating to the USB port/driver in my laptop wher
 
 Back in the Arduino IDE, I now had the option to select a port. Only one option came up for me: COM3, so I selected this, tried to burn a bootloader again, and this time it worked.
 
+Another thing you might want to check is whether the programmer is even turned on. 
+<!-- take a picture -->
+
 ## Testing
 
 To test whether burning the bootloader had worked, I uploaded an example program to the board. I disconnected the programmer, and instead used the USB-C cable to connect the logger to my computer. 
@@ -200,12 +203,18 @@ You need to upload a program (also known as firmware) to a Monarch logger so it 
 <!-- link here -->
 In the Arduino IDE, I opened the program v1_B. I needed to select what board I was using, as the Monarch is part of the ATTinyCore group. Just like how I added board definitions for the Margay in the earlier section
 <!-- link here -->
-, I also needed to add board definitions for the Monarch. I followed [these instructions](https://northernwidget.com/tutorial/#add-board-definitions-for-the-attinycore-microcontrollers), but basically I just went to **File > Preferences** and found "Additional boards manager URLs". Since I already had one URL in there, I clicked the button with the two overlapping rectangles, and entered the URL for the Monarch boards on a new line. The URL is: http://drazzy.com/package_drazzy.com_index.json
-In **Tools > Board > Boards Manager**, I searched for ATTinyCore and installed the one by Spence Konde. Now, I could select the board and programmer I was using. The board name for the Monarch is ATtiny841 (Micronucleus / Wattuino). Then, I chose **Sketch > Upload Using Programmer**. Even if it works, lights won't flash on the Monarch, but the IDE will still tell you if it was uploaded successfully.
+, I also needed to add board definitions for the Monarch. I followed [these instructions](https://northernwidget.com/tutorial/#add-board-definitions-for-the-attinycore-microcontrollers), but basically I just went to **File > Preferences** in the Arduino IDE and found "Additional boards manager URLs". Since I already had one URL in there, I clicked the button with the two overlapping rectangles, and entered the URL for the Monarch boards on a new line. The URL is: http://drazzy.com/package_drazzy.com_index.json
+In **Tools > Board > Boards Manager**, I searched for ATTinyCore and installed the one by Spence Konde. Now, I could select the board and programmer I was using. The board name for the Monarch is **ATtiny841 (Micronucleus / Wattuino)**. I inserted a 6-pin header into the programmer, and held it in place on at an angle so all pins would make contact with the Monarch. Then, I chose **Sketch > Upload Using Programmer**. Even if it works, lights won't flash on the Monarch, but the IDE will still tell you if it was uploaded successfully.
 
-Then, I went back to the Margay and uploaded a program that would tell it to communicate with the Monarch. 
+After that, I went back to the Margay and uploaded a program that would tell it to communicate with the Monarch (I did this using USB cable)
+<!-- link to section here -->
+
+Finally, I wired the Margay and the Monarch together. Green goes to , white goes to ,   red goes to 3v3, and black goes to ground.
+
+
+
+
 <!-- what program to upload to the Margay, and how to wire them together -->
-<!-- 6-pin header -->
 <!-- pictures of the finished setup -->
 
 

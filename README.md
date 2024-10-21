@@ -209,12 +209,7 @@ In **Tools > Board > Boards Manager**, I searched for ATTinyCore and installed t
 After that, I went back to the Margay and uploaded a program that would tell it to communicate with the Monarch (I did this using USB cable)
 <!-- link to section here -->
 
-Finally, I wired the Margay and the Monarch together. Green goes to , white goes to ,   red goes to 3v3, and black goes to ground.
-
-
-
-
-<!-- what program to upload to the Margay, and how to wire them together -->
+Finally, I wired the Margay and the Monarch together. Green(/brown) goes to SCL, white(/orange) goes to SDA, red goes to 3v3, and black goes to ground.
 <!-- pictures of the finished setup -->
 
 

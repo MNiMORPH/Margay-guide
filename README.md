@@ -106,7 +106,7 @@ Back in the Arduino IDE, I now had the option to select a port. Only one option 
 Another thing you might want to check is whether the programmer is even turned on. 
 <!-- take a picture -->
 
-## Testing
+## Uploading programs
 
 To test whether burning the bootloader had worked, I uploaded an example program to the board. I disconnected the programmer, and instead used the USB-C cable to connect the logger to my computer. 
 <div>
@@ -162,6 +162,9 @@ When setting the clock, insert the coin-cell battery into the logger. This doesn
 <!-- include a picture --> 
 
 ## Preparing for deployment
+
+### Assigning a Serial Number
+Since the Margay loggers look identical, it can be helpful to have a way to tell them apart, especially if one of them is having issues. 
 
 ### The SD card
 Insert this into the logger to record data, then insert it into your computer to read the data. You'll use a USB-SD card reader in order to insert it into your computer. Once you have done this, the data will appear on your computer as a text file. 

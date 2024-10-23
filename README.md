@@ -164,7 +164,14 @@ When setting the clock, insert the coin-cell battery into the logger. This doesn
 ## Preparing for deployment
 
 ### Assigning a Serial Number
-Since the Margay loggers look identical, it can be helpful to have a way to tell them apart, especially if one of them is having issues. 
+Since the Margay loggers look identical, it can be helpful to have a way to tell them apart, especially if one of them is having issues. Download the program [Margay_HardwareTest_v2](https://github.com/NorthernWidget/Project-Margay/tree/master/Software/Margay_HardwareTest_v2) and run it in the Arduino IDE. Open the serial monitor (if you're not sure how to do this, see below) and type in "SN Set". It will ask for board type, group number (who is deploying it), and individual ID. Once the serial number is set, it will remain in the board's memory even if you upload a new program to it.
+<!-- needs work -->
+
+### The serial monitor
+<!-- needs work -->
+One way to check if your Margay logger is taking reasonable data before you release it in the field is using the serial monitor. The serial monitor is a form of two-way communication between your computer and the Margay board. Just like uploading programs, it also uses USB to communicate. The serial monitor icon looks like a magnifying glass over a line of dots, and it is in the top right of the IDE, on the teal bar. After opening the serial monitor, you'll have the option to declare the rate of data transmission between your device and the logger, also known as the baud rate. Margay loggers have a baud rate of 38400 bits per second. If you are not sure where to find this, search for Serial.begin() in the Arduino program, and the number inside the parentheses is the baud rate. 
+
+If communication is working, you should be able to 
 
 ### The SD card
 Insert this into the logger to record data, then insert it into your computer to read the data. You'll use a USB-SD card reader in order to insert it into your computer. Once you have done this, the data will appear on your computer as a text file. 
